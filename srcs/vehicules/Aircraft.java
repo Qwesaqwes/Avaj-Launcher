@@ -12,7 +12,7 @@ public abstract class Aircraft
 	protected Aircraft(String name, Coordinates coordinates)
 	{
 		this.name = name;
-		this.Coordinates = coordinates;
+		this.coordinates = coordinates;
 		this.id = nextId();
 	}
 

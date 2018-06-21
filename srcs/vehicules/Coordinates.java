@@ -15,16 +15,16 @@ public class Coordinates
 
 	public int getLongitude()
 	{
-		return (this.longitude);
+		return (longitude);
 	}
 
 	public int getLatitude()
 	{
-		return (this.Latitude);
+		return (latitude);
 	}
 
 	public int getHeight()
 	{
-		return (this.Height);
+		return (height);
 	}
 }
