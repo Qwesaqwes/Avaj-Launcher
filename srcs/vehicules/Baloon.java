@@ -9,7 +9,7 @@ public class Baloon extends Aircraft implements Flyable
 
 	public Baloon(String name, Coordinates coordinates)
 	{
-		//do stuff
+		super(name, coordinates);
 	}
 
 	public void updateConditions()

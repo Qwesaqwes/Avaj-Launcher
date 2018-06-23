@@ -1,3 +1,4 @@
+package	srcs.weather;
 import srcs.vehicules.Flyable;
 
 public class Tower
