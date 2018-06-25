@@ -1,13 +1,17 @@
 package	srcs.weather;
 import srcs.vehicules.Flyable;
+import java.util.*;
 
 public class Tower
 {
-    private Flyable     observers;
+    private List<Flyable> observers = new ArrayList<Flyable>();
 
     public void register(Flyable Flyable)
     {
-        //do stuff
+        if (observers.contains(Flyable) == false)
+        {
+            observers.add(Flyable);
+        }
     }
 
     public void unregister(Flyable Flyable)

@@ -9,6 +9,7 @@ public class Main
 {
 	private static WeatherTower weatherTower;
 	private static List<Flyable> flyables = new ArrayList<Flyable>();
+	// private static Logger logger;
 
 	public static void main(String[] arg) throws InterruptedException
 	{
@@ -32,12 +33,16 @@ public class Main
 						Integer.parseInt(line.split(" ")[2]), Integer.parseInt(line.split(" ")[3]),
 						Integer.parseInt(line.split(" ")[4]));
 					if (flyable != null)
+					{
+						// System.out.println(line);
 						flyables.add(flyable);
+					}
 					// System.out.println(line);
 				}
-
+				// logger = new Logger();
 				for (Flyable flyable : flyables)
 				{
+					// System.out.println("enter flyable");
 					flyable.registerTower(weatherTower);
 				}
 
@@ -48,6 +53,8 @@ public class Main
 			}
 		}
 		// catch(CustomException e) {e.printStackTrace();}
-		catch(IOException e) {e.printStackTrace();}
+		catch (FileNotFoundException e) {System.out.println("Couldn't find file " + arg[0]);}
+		catch (IOException e) {System.out.println("There was an error while reading the file " + arg[0]);}
+		catch (ArrayIndexOutOfBoundsException e) {System.out.println("Specify simulation file");}
 	}
 }
