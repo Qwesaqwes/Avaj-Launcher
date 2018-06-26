@@ -21,6 +21,10 @@ public class Tower
 
     protected void conditionsChanged()
     {
-        //do stuff
+        //Update Conditions for each Aircrafts and check if they landed, if so need to unregister
+        for (Flyable flyable : observers)
+        {
+            flyable.updateConditions();
+        }
     }
 }

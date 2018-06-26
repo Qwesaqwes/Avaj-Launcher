@@ -1,4 +1,4 @@
-package srcs;
+package srcs.weather;
 import srcs.exceptions.CustomException;	//include exceptions class
 import java.io.*;		//for buffered and file
 import java.util.*;		//for List
@@ -9,7 +9,6 @@ public class Main
 {
 	private static WeatherTower weatherTower;
 	private static List<Flyable> flyables = new ArrayList<Flyable>();
-	// private static Logger logger;
 
 	public static void main(String[] arg) throws InterruptedException
 	{
@@ -26,35 +25,29 @@ public class Main
 					System.out.println("Invalid simulations count " + simulations);
 					System.exit(1);
 				}
-				// System.out.println(line);
 				while ((line = reader.readLine()) != null)
 				{
 					Flyable flyable = AircraftFactory.newAircraft(line.split(" ")[0], line.split(" ")[1],
 						Integer.parseInt(line.split(" ")[2]), Integer.parseInt(line.split(" ")[3]),
 						Integer.parseInt(line.split(" ")[4]));
 					if (flyable != null)
-					{
-						// System.out.println(line);
 						flyables.add(flyable);
-					}
-					// System.out.println(line);
 				}
-				// logger = new Logger();
+				Logger.InitFile();
 				for (Flyable flyable : flyables)
 				{
-					// System.out.println("enter flyable");
 					flyable.registerTower(weatherTower);
 				}
-
-				// for (int i = 1; i <= simulations; i++)
-				// {
-				// 	weatherTower.changeWeather();
-				// }
+				for (int i = 1; i <= simulations; i++)
+				{
+					weatherTower.changeWeather();
+				}
 			}
 		}
 		// catch(CustomException e) {e.printStackTrace();}
 		catch (FileNotFoundException e) {System.out.println("Couldn't find file " + arg[0]);}
 		catch (IOException e) {System.out.println("There was an error while reading the file " + arg[0]);}
 		catch (ArrayIndexOutOfBoundsException e) {System.out.println("Specify simulation file");}
+		finally {Logger.GetFileToWrite().close();}
 	}
 }

@@ -13,6 +13,21 @@ public class Coordinates
 		this.height = height;
 	}
 
+	public void setLongitude(int newLongitude)
+	{
+		longitude = newLongitude;
+	}
+
+	public void setLatitude(int newLatitude)
+	{
+		latitude = newLatitude;
+	}
+
+	public void setHeight(int newHeight)
+	{
+		height = newHeight;
+	}
+
 	public int getLongitude()
 	{
 		return (longitude);

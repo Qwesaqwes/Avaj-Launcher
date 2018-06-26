@@ -1,18 +1,16 @@
 package	srcs.weather;
 import	srcs.vehicules.Coordinates;
-import	srcs.weather.*;
+import	srcs.weather.WeatherProvider;;
 
 public class WeatherTower extends Tower
 {
 	public String	getWeather(Coordinates coordinates)
 	{
-		//do stuff
-		return null;
+		return (WeatherProvider.getProvider().getCurrentWeather(coordinates));
 	}
 
 	void changeWeather()
 	{
-		//do stuff
+		conditionsChanged();
 	}
-
 }
