@@ -5,6 +5,7 @@ import java.util.*;
 public class Tower
 {
     private List<Flyable> observers = new ArrayList<Flyable>();
+    private Iterator<Flyable> iterator;
 
     public void register(Flyable Flyable)
     {
@@ -14,17 +15,22 @@ public class Tower
         }
     }
 
-    public void unregister(Flyable Flyable)
+    public void unregister(Flyable flyable)
     {
-        //do stuff
+        iterator.remove();
     }
 
     protected void conditionsChanged()
     {
         //Update Conditions for each Aircrafts and check if they landed, if so need to unregister
-        for (Flyable flyable : observers)
+        if (observers.isEmpty() == false)
         {
-            flyable.updateConditions();
+            iterator = observers.iterator();
+            while (iterator.hasNext())
+            {
+                Flyable flyable = iterator.next();
+                flyable.updateConditions();
+            }
         }
     }
 }

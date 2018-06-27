@@ -4,10 +4,10 @@ import java.lang.String;
 
 public abstract class Aircraft
 {
-	protected	long id = 0;
-	protected	String name;
-	protected	Coordinates coordinates;
-	private		long idCounter = 0;
+	protected		long id = 0;
+	protected		String name;
+	protected		Coordinates coordinates;
+	private	static	long idCounter = 0;
 
 	protected Aircraft(String name, Coordinates coordinates)
 	{
@@ -16,9 +16,9 @@ public abstract class Aircraft
 		this.id = nextId();
 	}
 
-	private long nextId()
+	private static long nextId()
 	{
-		this.idCounter += 1;
-		return (this.idCounter);
+		idCounter += 1;
+		return (idCounter);
 	}
 }

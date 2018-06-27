@@ -2,6 +2,7 @@ package srcs.weather;
 import srcs.exceptions.CustomException;	//include exceptions class
 import java.io.*;		//for buffered and file
 import java.util.*;		//for List
+
 import srcs.vehicules.*;
 import srcs.weather.*;
 
@@ -9,6 +10,7 @@ public class Main
 {
 	private static WeatherTower weatherTower;
 	private static List<Flyable> flyables = new ArrayList<Flyable>();
+	private static int		simulations;
 
 	public static void main(String[] arg) throws InterruptedException
 	{
@@ -19,7 +21,12 @@ public class Main
 			if (line != null)
 			{
 				weatherTower = new WeatherTower();
-				int simulations = Integer.parseInt(line.split(" ")[0]);
+				try{simulations = Integer.parseInt(line.split(" ")[0]);}
+				catch (NumberFormatException e)
+				{
+					System.out.println("Error trying to get number of simulation");
+					System.exit(1);
+				}
 				if (simulations < 0)
 				{
 					System.out.println("Invalid simulations count " + simulations);
@@ -27,11 +34,15 @@ public class Main
 				}
 				while ((line = reader.readLine()) != null)
 				{
-					Flyable flyable = AircraftFactory.newAircraft(line.split(" ")[0], line.split(" ")[1],
-						Integer.parseInt(line.split(" ")[2]), Integer.parseInt(line.split(" ")[3]),
-						Integer.parseInt(line.split(" ")[4]));
-					if (flyable != null)
-						flyables.add(flyable);
+					try
+					{
+						Flyable flyable = AircraftFactory.newAircraft(line.split(" ")[0], line.split(" ")[1],
+							Integer.parseInt(line.split(" ")[2]), Integer.parseInt(line.split(" ")[3]),
+							Integer.parseInt(line.split(" ")[4]));
+						if (flyable != null)
+							flyables.add(flyable);
+					}
+					catch (CustomException e) {e.printStackTrace();}
 				}
 				Logger.InitFile();
 				for (Flyable flyable : flyables)
@@ -44,7 +55,6 @@ public class Main
 				}
 			}
 		}
-		// catch(CustomException e) {e.printStackTrace();}
 		catch (FileNotFoundException e) {System.out.println("Couldn't find file " + arg[0]);}
 		catch (IOException e) {System.out.println("There was an error while reading the file " + arg[0]);}
 		catch (ArrayIndexOutOfBoundsException e) {System.out.println("Specify simulation file");}
